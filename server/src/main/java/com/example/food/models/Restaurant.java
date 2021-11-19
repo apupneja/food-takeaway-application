@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor 
+@AllArgsConstructor 
+@Builder 
+
 public class Restaurant {
 
     @Id
@@ -12,48 +17,4 @@ public class Restaurant {
     private String restaurantName;
     @ManyToMany(cascade = {CascadeType.ALL})
     private List<FoodItem> foodItems;
-
-    public long getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(long restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
-    public List<FoodItem> getFoodItems() {
-        return foodItems;
-    }
-
-    public void setFoodItems(FoodItem foodItems) {
-        this.foodItems.add(foodItems);
-    }
-
-    public Restaurant(long restaurantId, String restaurantName, List<FoodItem> foodItems) {
-        this.restaurantId = restaurantId;
-        this.restaurantName = restaurantName;
-        this.foodItems = foodItems;
-    }
-
-    public Restaurant() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "restaurant{" +
-                "restaurantId=" + restaurantId +
-                ", restaurantName='" + restaurantName + '\'' +
-                ", foodItems=" + foodItems.toString() +
-                '}';
-    }
-
 }
