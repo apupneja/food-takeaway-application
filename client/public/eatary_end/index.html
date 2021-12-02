@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="index.css">
+  <title> </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div><img src="..\images\restaurant\Amul Cool Cafe.jpg" alt="Amul Cafe">
+  <p>Amul Cafe</p>
+
+</div>
+<div><img src="..\images\restaurant\Food King.jpg" alt="Food King">
+  <p>Food King</p>
+</div>
+<div><img src="..\images\restaurant\Gajalaxmi.jpg" alt="Gajalaxmi">
+  <p> Gajalaxmi</p>
+</div>
+<div><img src="..\images\restaurant\Ice and Spice.jpg" alt="Ice and Spice">
+  <p>Ice and Spice</p>
+</div>
+<div><img src="..\images\restaurant\Red Chilly.jpg" alt="Red chilly">
+  <p>Red chilly</p>
+</div>
+<div><img src="..\images\restaurant\Subspot.jpg" alt="Subspot">
+  <p>Subspot</p>
+
+  <script>
+    window.onload = ()=>{
+      [...document.querySelectorAll("img")].forEach(img=>{
+        console.log("BRUH")
+        img.onclick=event=>{
+          let src = img.src;
+          src = src.substr(src.lastIndexOf("/")+1);
+          src = src.substr(0, src.indexOf("."))
+          // console.log(src)
+          window.location.href = "content.html?r="+src
+        }
+      })
+    }
+  </script>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
