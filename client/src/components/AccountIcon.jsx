@@ -3,6 +3,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 function AccountIcon(props) {
+    // eslint-disable-next-line
     const [loggedOut, setLoggedOut] = useState(false)
     function handleLogOut(){
         axios.get('http://localhost:8080/api/logout',{
