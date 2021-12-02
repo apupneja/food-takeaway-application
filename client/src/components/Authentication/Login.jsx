@@ -39,6 +39,7 @@ function Login(props) {
             })
             .catch(function (error) {
                 console.log(error);
+                alert('Please enter correct username and password!')
             })
     }
     

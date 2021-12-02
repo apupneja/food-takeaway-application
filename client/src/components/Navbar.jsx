@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Navbar({ parentCallback },props) {
+function Navbar(props,{ parentCallback }) {
 
     const [search, setSearch] = useState();
     function handleSearch(event) {
