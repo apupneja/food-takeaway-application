@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <link rel="stylesheet" href="content.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;600&amp;display=swap">
+</head>
+
+<body>
+  <div id="restaurant-name">Restaurant Name</div>
+  <div id="orders">
+  </div>
+  <script>
+    let rest = window.location.href
+    rest = rest.substr(rest.lastIndexOf("?r=") + 3)
+    rest = rest.replace(/%20/g, " ")
+    document.title = rest
+
+    function convertToFormData(data) {
+      var form_data = new FormData();
+      for (var key in data) {
+        form_data.append(key, data[key]);
+      }
+      return form_data;
+    }
+
+    async function get_access_token() {
+      let form = convertToFormData({
+        username: "admin",
+        password: "oopisshit"
+      });
+      let o = await fetch(`http://localhost:8080/`, {
+        method: 'post',
+        mode: 'cors',
+        body: form
+      })
+      o = await o.json()
+      return o.access_token
+    }
+    window.onload = async () => {
+      document.getElementById("restaurant-name").innerHTML = rest
+      let access_token = await get_access_token()
+      console.log(access_token)
+
+      let orders = await fetch("http://localhost:8080/api/user/getOrder", {
+        headers: {
+          Authorization: "Bearer "+access_token
+        },
+        method:'GET',
+        mode:'cors'
+      })
+      orders = await orders.json()
+
+      orders = orders.filter(e=>e.restaurantName == rest)
+      console.log(orders)
+
+      let htmls = []
+      for(const order of orders) {
+        let fios = order.foodItemOrder
+        let items = []
+        for(const item of fios) {
+          items.push(item.name)
+        }
+        htmls.push(`<div class="order"><div class="items"><username>${order.username}</username>${items.join("<br />")}</div></div>`)
+        console.log(items)
+      }
+      document.getElementById("orders").innerHTML = htmls.join("")
+    }
+  </script>
+</body>
+
+</html>
